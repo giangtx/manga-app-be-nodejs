@@ -31,7 +31,7 @@ export const findByCategory = catchAsync( async(request, response) => {
 })
 
 export const addManga = catchAsync( async(request, response) => {
-    const newManga = await mangaService.createManga(request.body)
+    const newManga = await mangaService.createManga(request, response)
     response.json({
         status: 'ok',
         data: newManga,

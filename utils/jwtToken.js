@@ -38,3 +38,34 @@ export const verifyToken = (roles) => (request, response, next) => {
         // throw new Error("Missing token");
     }
 }
+
+export const verifyTokenCookie = (roles) => (request, response, next) => {
+    console.log('hé')
+    if (typeof request.headers.cookie !== "undefined") {
+        let rawCookie = request.headers.cookie.split('; ')
+        let rawJWT = '';
+        rawCookie.forEach(test => {
+            if(test.split('=')[0]==='JWT'){
+                rawJWT = test.split('=')[1];
+            }
+        });
+        jwt.verify(rawJWT, jwtConfig.secretKey, (err, user) => {
+            if (err) {  
+                return response.status(401).json({ error: "Invalid token cookie" });
+            }
+            if(roles && !roles.includes(user.data.role)){
+                return response.status(403).json({
+                    status: 403,
+                    message: "access denied" 
+                });
+            }
+            return next();
+        });
+
+    } else {
+        return response.status(401).json({ 
+            status: 401,
+            message: "Missing token" 
+        });
+    }
+}

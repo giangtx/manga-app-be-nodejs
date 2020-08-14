@@ -3,6 +3,7 @@ import httpStatus from 'http-status'
 import Manga from '../model/Manga'
 import Category from '../model/Category'
 import CategoryMana from '../model/CategoryManga'
+import multipleUpload from '../utils/multipleUpload'
 
 export const getAll = async() => {
     return Manga.findAll()
@@ -21,8 +22,9 @@ export const getById = async(id) => {
     return manga
 }
 
-export const createManga = async(request) => {
-    let { name, numberOfChapters, author, coverPicture, description,categoryId } = request;
+export const createManga = async(request, response) => {
+
+    let { name, numberOfChapters, author, coverPicture, description,categoryId } = request.body;
     const newManga = await Manga.create({
         name,
         numberOfChapters,
@@ -38,7 +40,7 @@ export const createManga = async(request) => {
 }
 
 export const updateManga = async(id, request) => {
-    let { name, numberOfChapters, author, coverPicture, description, categoryId } = request;
+    let { name, numberOfChapters, author, coverPicture, description, categoryId } = request.body;
     const manga = await Manga.findByPk(id);
     if(!manga) {
         throw new ApiError(httpStatus.NOT_FOUND, 'manga not found')

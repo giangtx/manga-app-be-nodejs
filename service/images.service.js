@@ -1,7 +1,7 @@
 import ApiError from '../utils/ApiError'
 import httpStatus from 'http-status'
 import Images from '../model/Images'
-import * as upload from '../utils/multipleUpload'
+import multipleUpload from '../utils/multipleUpload'
 
 export const getByChapter = async(chapterId) => {
     const images = await Images.findAll({
@@ -14,7 +14,7 @@ export const getByChapter = async(chapterId) => {
 }
 
 export const addImages = async(request, response) => {
-    await upload.multipleUpload(request, response);
+    await multipleUpload(request, response);
     request.files.forEach( async(file,index) => {
         await Images.create({
             chapterId: request.body.chapterId,

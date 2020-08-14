@@ -6,7 +6,7 @@ import { ROLE_USER, ROLE_ADMIN, ROLE_ROOT } from '../config/role.config'
 const router = express.Router();
 
 router.route('/')
-    .post(jwtToken.verifyToken(ROLE_ADMIN), userController.createUser)
+    .post(jwtToken.verifyToken( [ ROLE_ADMIN ]), userController.createUser)
 
 router.route('/:id')
     .get(jwtToken.verifyToken([ ROLE_USER, ROLE_ADMIN ]), userController.getById)

@@ -3,6 +3,10 @@ import * as authService from '../service/auth.service'
 
 export const login = catchAsync( async(request, response) => {
     const user = await authService.login(request.body);
+    response.cookie('JWT',user,{
+        maxAge: 86400000,
+        httpOnly: true
+    })
     response.json({
         tokenType: 'Bearer',
         token: user,
