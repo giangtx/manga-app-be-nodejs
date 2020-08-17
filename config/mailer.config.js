@@ -1,5 +1,5 @@
-const ADMIN_EMAIL = 'giangnt621@wru.vn';
-const ADMIN_PASSWORD = '0392039922';
+const ADMIN_EMAIL = '*******';
+const ADMIN_PASSWORD = '******';
 const MAIL_HOST = 'smtp.gmail.com';
 const MAIL_PORT = 587;
 const REGISTER_SUBJECT = 'Thông báo đăng ký tài khoản';
