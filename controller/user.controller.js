@@ -27,3 +27,12 @@ export const updateUser = catchAsync( async(request, response) => {
         message: 'update user success'
     })
 })
+
+export const changeAvatar = catchAsync( async(request, response) => {
+    const user = await userService.changeAvatar(request, response);
+    response.json({
+        status: 200,
+        data: user,
+        message: 'change avatar success'
+    })
+})

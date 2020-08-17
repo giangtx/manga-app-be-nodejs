@@ -3,7 +3,7 @@ import httpStatus from 'http-status'
 import Manga from '../model/Manga'
 import Category from '../model/Category'
 import CategoryMana from '../model/CategoryManga'
-import multipleUpload from '../utils/multipleUpload'
+import { singleUpload } from '../utils/multipleUpload'
 
 export const getAll = async() => {
     return Manga.findAll()
@@ -23,13 +23,13 @@ export const getById = async(id) => {
 }
 
 export const createManga = async(request, response) => {
-
-    let { name, numberOfChapters, author, coverPicture, description,categoryId } = request.body;
+    await singleUpload(request,response)
+    let { name, numberOfChapters, author, description,categoryId } = request.body;
     const newManga = await Manga.create({
         name,
         numberOfChapters,
         author,
-        coverPicture,
+        coverPicture: request.file ? request.file.path : 'defaul-image',
         description,
         createdTime: Date.now(),
     },{
@@ -39,17 +39,19 @@ export const createManga = async(request, response) => {
     return newManga
 }
 
-export const updateManga = async(id, request) => {
-    let { name, numberOfChapters, author, coverPicture, description, categoryId } = request.body;
+export const updateManga = async(request, response) => {
+    let { id } = request.params;
     const manga = await Manga.findByPk(id);
     if(!manga) {
         throw new ApiError(httpStatus.NOT_FOUND, 'manga not found')
     }
+    await singleUpload(request,response);
+    let { name, numberOfChapters, author, description, categoryId } = request.body;  
     await manga.update({
         name: name ? name : manga.name,
         numberOfChapters: numberOfChapters ? numberOfChapters : manga.numberOfChapters,
         author: author ? author : manga.author,
-        coverPicture: coverPicture ? coverPicture : manga.coverPicture,
+        coverPicture: request.file ? request.file.path : manga.coverPicture,
         description: description ? description : manga.description,
         updatedTime: Date.now(),
     })

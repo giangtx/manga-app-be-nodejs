@@ -1,7 +1,7 @@
 import ApiError from '../utils/ApiError'
 import httpStatus from 'http-status'
 import Images from '../model/Images'
-import multipleUpload from '../utils/multipleUpload'
+import { multipleUpload } from '../utils/multipleUpload'
 
 export const getByChapter = async(chapterId) => {
     const images = await Images.findAll({

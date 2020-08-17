@@ -20,9 +20,9 @@ const User = sequelize.define('user',{
         field: 'password',
         type: Sequelize.STRING
     },
-    imageId: {
-        field: 'image_id',
-        type: Sequelize.INTEGER
+    avatar: {
+        field: 'avatar',
+        type: Sequelize.STRING
     },
     fullName: {
         field: 'full_name',

@@ -15,7 +15,8 @@ const storage = multer.diskStorage({
     }
 })
 
-const uploadManyFiles = multer({storage: storage}).array("file");
-const multipleUpload = util.promisify(uploadManyFiles);
+const uploadManyFiles = multer({ storage: storage }).array("file");
+const uploadSingleFile = multer({ storage: storage }).single("file")
 
-export default multipleUpload;
+export const multipleUpload = util.promisify(uploadManyFiles);
+export const singleUpload = util.promisify(uploadSingleFile);

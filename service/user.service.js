@@ -1,7 +1,8 @@
-import ApiError from '../utils/ApiError'
 import httpStatus from 'http-status'
-import User from '../model/User'
 import bcrypt from 'bcrypt'
+import ApiError from '../utils/ApiError'
+import User from '../model/User'
+import { singleUpload } from '../utils/multipleUpload'
 
 export const getById = async(id) => {
     const user = await User.findByPk(id);
@@ -36,6 +37,19 @@ export const updateUser = async(id, request) => {
         birthday: birthday ? birthday : user.birthday,
         phone: phone ? phone : user.phone,
         gender: gender ? gender : user.gender
+    })
+    return user;
+}
+
+export const changeAvatar = async(request, response) => {
+    let { id } = request.params;
+    const user = await User.findByPk(id);
+    if(!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'user not found')
+    }
+    await singleUpload(request, response);
+    await user.update({
+        avatar: request.file ? request.file.path : user.avatar
     })
     return user;
 }

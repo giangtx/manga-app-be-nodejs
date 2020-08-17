@@ -39,8 +39,7 @@ export const addManga = catchAsync( async(request, response) => {
     })
 })
 export const editManga = catchAsync( async(request, response) => {
-    let { id } = request.params
-    const manga = await mangaService.updateManga(id, request.body)
+    const manga = await mangaService.updateManga(request, response)
     response.json({
         status: 'ok',
         data: manga,

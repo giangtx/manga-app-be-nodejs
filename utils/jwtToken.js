@@ -40,7 +40,6 @@ export const verifyToken = (roles) => (request, response, next) => {
 }
 
 export const verifyTokenCookie = (roles) => (request, response, next) => {
-    console.log('hé')
     if (typeof request.headers.cookie !== "undefined") {
         let rawCookie = request.headers.cookie.split('; ')
         let rawJWT = '';

@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import { sequelize, Op } from '../config/database'
+import User from './User'
 
 const CommentManga = sequelize.define('comment_manga',{
     id: {
@@ -23,9 +24,20 @@ const CommentManga = sequelize.define('comment_manga',{
     imageId: {
         field: 'image_id',
         type: Sequelize.INTEGER
+    },
+    timeCreate: {
+        field: 'time_create',
+        type: Sequelize.DATE
+    },
+    timeUpdate: {
+        field: 'time_update',
+        type: Sequelize.DATE
     }
 }, {
     tableName: 'comment_manga',
     timestamps: false
 })
+
+CommentManga.belongsTo(User);
+
 export default CommentManga;
