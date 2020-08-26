@@ -28,6 +28,14 @@ const Manga = sequelize.define('manga', {
         field: 'ratings_count',
         type: Sequelize.DOUBLE
     },
+    createBy: {
+        field: 'create_by',
+        type: Sequelize.INTEGER
+    },
+    updateBy: {
+        field: 'update_by',
+        type: Sequelize.INTEGER
+    },
     createdTime: {
         field: 'created_time',
         type: Sequelize.DATE

@@ -1,8 +1,9 @@
-import httpStatus from 'http-status'
-import ApiError from '../utils/ApiError'
+import httpStatus from 'http-status';
+import ApiError from '../utils/ApiError';
 import * as upload from '../utils/multipleUpload';
-import Chapters from '../model/Chapters'
-import Images from '../model/Images'
+import Chapters from '../model/Chapters';
+import Images from '../model/Images';
+import Manga from '../model/Manga';
 
 export const getByManga = async(mangaId) => {
     const chapters = await Chapters.findAll({
@@ -25,13 +26,16 @@ export const getById = async(id) => {
 export const addChapters = async(request, response) => {
     await upload.multipleUpload(request, response);
     let { mangaId, title, chapterNo} = request.body;
-    console.log(request.body.mangaId+ " "+ request.body.title+ " "+ request.body.chapterNo)
+    const manga = await Manga.findOne({where:{id:mangaId}});
+    if(!manga){
+        throw new ApiError(httpStatus.NOT_FOUND, `manga with id: ${mangaId} not found`)
+    }
     const chapter = await Chapters.create({
         mangaId,
         dateOfOrigin: Date.now(),
         title,
         chapterNo
-    }) 
+    })
     request.files.forEach( async(file,index) => {
         await Images.create({
             chapterId: chapter.id,
@@ -41,6 +45,7 @@ export const addChapters = async(request, response) => {
             type: file.mimetype
         })
     });
+    
     return chapter;
 }
 export const updateChapters = async(id, request) => {

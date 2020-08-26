@@ -10,6 +10,15 @@ export const getById = catchAsync( async(request, response) => {
     })
 })
 
+export const getInfoUser = catchAsync( async(request, response) => {
+    const user = await userService.getInfoUser(request, response)
+    response.json({
+        status: 200,
+        data: user,
+        message: 'get info user success'
+    })
+})
+
 export const createUser = catchAsync( async(request, response) => {
     const user = await userService.createUser(request.body)
     response.json({

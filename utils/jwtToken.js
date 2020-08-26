@@ -28,6 +28,7 @@ export const verifyToken = (roles) => (request, response, next) => {
                     message: "access denied" 
                 });
             }
+            request.jwtDecoded = user.data;
             return next();
         });
     } else {
@@ -58,6 +59,8 @@ export const verifyTokenCookie = (roles) => (request, response, next) => {
                     message: "access denied" 
                 });
             }
+            request.jwtDecoded = user.data;
+            // console.log(request)
             return next();
         });
 

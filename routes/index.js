@@ -7,6 +7,7 @@ import mangaRouter from './manga';
 import userRouter from './users';
 import authRouter from './auth';
 import testRouter from './test';
+import likeRouter from  './like';
 
 const router = express.Router();
 
@@ -18,6 +19,6 @@ router.use('/mangas', mangaRouter);
 router.use('/user', userRouter);
 router.use('/auth', authRouter);
 router.use('/test', testRouter);
-
+router.use('/like', likeRouter);
 
 export default router;

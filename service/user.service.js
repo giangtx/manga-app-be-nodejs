@@ -5,11 +5,26 @@ import User from '../model/User'
 import { singleUpload } from '../utils/multipleUpload'
 
 export const getById = async(id) => {
-    const user = await User.findByPk(id);
+    const user = await User.findOne({
+        where: { id },
+        attributes: ['id', 'email', 'username', 'avatar', 'fullName', 'birthday', 'phone', 'status', 'gender', 'userType']
+    });
     if(!user) {
         throw new ApiError(httpStatus.NOT_FOUND, 'user not found')
     }
     return user
+}
+
+export const getInfoUser = async(request, response) => {
+    const { id } = request.jwtDecoded;
+    const user = await User.findOne({
+        where: { id },
+        attributes: ['id', 'email', 'username', 'avatar', 'fullName', 'birthday', 'phone', 'status', 'gender', 'userType']
+    });
+    if(!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'user not found')
+    }
+    return user;
 }
 
 export const createUser = async(request) => {

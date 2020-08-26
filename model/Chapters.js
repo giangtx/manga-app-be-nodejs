@@ -31,6 +31,22 @@ const Chapters = sequelize.define('chapters', {
     views: {
         field: 'views',
         type: Sequelize.INTEGER
+    },
+    createBy: {
+        field: 'create_by',
+        type: Sequelize.INTEGER
+    },
+    updateBy: {
+        field: 'update_by',
+        type: Sequelize.INTEGER
+    },
+    createTime: {
+        field: 'create_time',
+        type: Sequelize.DATE
+    },
+    updateTime: {
+        field: 'update_time',
+        type: Sequelize.DATE
     }
 }, {
     tableName: 'chapters',

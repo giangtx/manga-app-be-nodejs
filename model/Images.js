@@ -27,6 +27,22 @@ const Images = sequelize.define('images', {
     type: {
         field: 'type',
         type: Sequelize.STRING
+    },
+    createBy: {
+        field: 'create_by',
+        type: Sequelize.INTEGER
+    },
+    updateBy: {
+        field: 'update_by',
+        type: Sequelize.INTEGER
+    },
+    createTime: {
+        field: 'create_time',
+        type: Sequelize.DATE
+    },
+    updateTime: {
+        field: 'update_time',
+        type: Sequelize.DATE
     }
 }, {
     tableName: 'images',

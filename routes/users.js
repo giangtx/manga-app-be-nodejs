@@ -5,11 +5,15 @@ import { ROLE_USER, ROLE_ADMIN, ROLE_ROOT } from '../config/role.config'
 
 const router = express.Router();
 
+
 router.route('/')
     .post(verifyToken( [ ROLE_ADMIN ]), userController.createUser)
 
+router.route('/info')
+    .get(verifyTokenCookie([ ROLE_ADMIN, ROLE_USER, ROLE_ROOT ]), userController.getInfoUser)
+
 router.route('/:id')
-    .get(verifyToken([ ROLE_USER, ROLE_ADMIN ]), userController.getById)
+    .get(verifyTokenCookie([ ROLE_ADMIN ]), userController.getById)
     .put(verifyToken([ ROLE_USER, ROLE_ADMIN ]), userController.updateUser)
 
 router.route('/avatar/:id')
