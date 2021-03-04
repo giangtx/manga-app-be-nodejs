@@ -1,7 +1,7 @@
 const dbConfig = {
     HOST: 'localhost',
     USERNAME: 'root',
-    PASSWORD: '12345',
+    PASSWORD: '123456',
     DBNAME: 'manga_app',
     dialect: 'mysql'
 }

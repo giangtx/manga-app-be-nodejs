@@ -1,3 +1,44 @@
+2.2.5 ( 21/09/2020 )
+  - typings: add ResultSetHeader                   #1213
+
+2.2.4 ( 21/09/2020 )
+  - use bundled types/mysql instead of dependency  #1211
+
+2.2.3 ( 21/09/2020 )
+  - use github:types/mysql as base for types       #1208
+
+2.2.2 ( 19/09/2020 )
+  - Add the authPlugins types to ConnectionOptions #1206
+
+2.2.1 ( 18/09/2020 )
+  - update package.json files entry to include 
+    type definition files                          #1205
+
+2.2.0 ( 18/09/2020 )
+  - added TS type definitions                      #1204, #1028
+  - better error handling for invalid JSON row 
+    responses                                      #915
+  - fix for iconv-lite and some bundlers issues    #1187
+  - error early when callbacks incorrectly passed  #1025
+    to a promise wrapper
+  - add support for sha256_password authentication #1153, #1152
+    plugin                                          
+  - handle backpressure when loading data from     #1167
+    file
+  - Pass in the callback when ending the pool      #1170
+    connection
+  - allow using `dateStrings` with specific types  #1200
+  - Fix incompatibility with code minimizers       #1191
+  - fix with connect timeout timer cleanup after   #950
+    error
+  - Add ES Module Support                          #1169, #1100
+  - Release connection on exception                #1108
+  - Add table to parser cache key                  #1142, #1143
+  - Fix Connection.connect callback may never      #1136, #1137
+    be executed
+  - "cardinal" no longer is a requred dependency   #1135
+  - Fix incompatibility when zero parameter        #1129, #1130
+
 2.1.0
   - added `enableKeepAlive` connection option      #1081, #683
 
